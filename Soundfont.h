@@ -19,11 +19,10 @@ class SoundFont {
 #define SOUNDFONT_QUANTITY 4
 #define NR_CONFIGFOLDERFILES 19
 #define NR_JUKEBOXSONGS 2
-#define NR_SF1_FILES 26  //grey
-#define NR_SF2_FILES 26  //dark
-#define NR_SF3_FILES 26  //ancient
-#define NR_SF4_FILES 26  //sheppard
-//#define NR_SF4_FILES 17  //yuleside
+#define NR_SF1_FILES 26  
+#define NR_SF2_FILES 26  
+#define NR_SF3_FILES 26  
+#define NR_SF4_FILES 26  
 
   public:
 
