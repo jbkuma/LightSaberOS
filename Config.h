@@ -9,6 +9,15 @@
 #if not defined CONFIG_H_
 #define CONFIG_H_
 
+/***** Battery meter settings *****/
+#define BATTERY_CHECK // comment to disable
+#define BATTERY_FACTOR 6.26 // Callibration value to compensate for component variation
+#define BATTERY_READPIN 17 //A3 - read battery level 100kohm from GND, 470kohm from Bat+
+#define LOW_BATTERY 3.3 // low voltage for battery, a 5v Arduino or DIYino requires 3.3v 
+#define FULL_BATTERY 4.15 // full voltage for battery, nominally 4.2 for a 3.7v battery
+//cRGB C1;  //Low meter color
+//cRGB C2;  //middle meter color
+//cRGB C3;  //high meter color
 
 
 /*!!!!!IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT!!!
@@ -42,14 +51,14 @@
 /*
  * BLADE TYPE
  *
- * RGB LED OR NEOPIXEL users:
+ * RGB LED OR PIXELBLADE users:
  * Comment the following line will
  * disable and remove all LEDSTRINGS
  * blocks from compile
  *************************************/
 //#define LEDSTRINGS
-//#define LUXEON
-#define NEOPIXEL
+//#define STAR_LED
+#define PIXELBLADE
 
 /************************************/
 /*
@@ -70,6 +79,7 @@
 #define VOL          20
 #define SOUNDFONT       3
 #define SWING         1000
+#define CLASH_THRESHOLD 6 //default 10
 /************************************/
 
 /*
@@ -79,10 +89,10 @@
 #if defined LEDSTRINGS
 #define CONFIG_VERSION     "L01"
 #endif
-#if defined LUXEON
+#if defined STAR_LED
 #define CONFIG_VERSION     "L02"
 #endif
-#if defined NEOPIXEL
+#if defined PIXELBLADE
 #define CONFIG_VERSION     "L03"
 #endif
 #define MEMORYBASE       32
@@ -90,11 +100,11 @@
 /************************************/
 
 
-#define SINGLEBUTTON
+//#define SINGLEBUTTON
 
-#if defined NEOPIXEL
+#if defined PIXELBLADE
 // How many leds in one strip?
-#define NUMPIXELS 120  // can go up to 120, could lead to memory problems if further increased
+#define NUMPIXELS 23  // can go up to 120, could lead to memory problems if further increased
 
 #ifdef CROSSGUARDSABER
 // define how many pixels are used for the crossguard and how many for the main blade
@@ -112,9 +122,9 @@ static const uint8_t rgbFactor = 255;
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
 // ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
 #define DATA_PIN 			13 // D13
-#define STRING1				5
-#define STRING2 			6
-#define STRING3 			9
+//#define STRING1				5
+//#define STRING2 			6
+//#define STRING3 			9
 #endif
 
 
@@ -123,7 +133,7 @@ static const uint8_t rgbFactor = 255;
 
 
 
-#if defined LUXEON
+#if defined STAR_LED
 
 static const uint8_t rgbFactor = 100;
 
@@ -132,7 +142,7 @@ static const uint8_t rgbFactor = 100;
  * Range : 6<->600
  * Default: 48
  */
-//#define COLORS		 		14
+#define COLORS		 		14
 #endif
 /************************************/ // BLADE TYPE
 
@@ -150,11 +160,11 @@ static const uint8_t rgbFactor = 100;
  * BE VERY CAREFULL WITH THIS ONE OR 
  * YOU'LL BURN YOUR BLADE'S LED 
  ************************************/
-#define MAX_BRIGHTNESS		200
+#define MAX_BRIGHTNESS		225
 
 // How long do the light effect last for the different FX's
 #define CLASH_FX_DURATION 200
-#define BLASTER_FX_DURATION 300
+#define BLASTER_FX_DURATION 150
 #define SWING_FX_DURATION 400
 
 
@@ -169,7 +179,7 @@ static const uint8_t rgbFactor = 100;
  */
 #define SWING_SUPPRESS     500
 #define CLASH_SUPRESS     400  // do not modify below 400, otherwise interlocking clash sounds can occur
-#define BLASTERBLOCK_SUPRESS     200
+#define BLASTERBLOCK_SUPRESS     100
 #define HUM_RELAUNCH     5000
 
 /* BLASTER DEFLECT TYPE
@@ -234,7 +244,7 @@ static const uint8_t rgbFactor = 100;
 //#define FoCSTRING			14
 #endif
 
-#ifdef NEOPIXELS
+#ifdef PIXELBLADE
 
 #define LS1       3
 #define LS2       5
@@ -244,10 +254,10 @@ static const uint8_t rgbFactor = 100;
 #define LS6       11
 
 #endif
-#if defined LUXEON
+#if defined STAR_LED
 
 #define LED_RED 			3
-#define LED_GREEN 			5
+#define LED_GREEN 	  5
 #define LED_BLUE 			6
 #endif
 
@@ -318,12 +328,12 @@ static const uint8_t rgbFactor = 100;
  * CONFIG MENU PARAMETERS
  */
 #define JUKEBOX
-#if defined LUXEON
+#if defined STAR_LED
 #define CONFIG_BLADE_MAIN_COLOR
 #define CONFIG_BLADE_CLASH_COLOR
 #endif
 
-#if defined NEOPIXELS
+#if defined PIXELBLADES
 #define CONFIG_BLADE_MAIN_COLOR
 #define CONFIG_BLADE_CLASH_COLOR
 #define CONFIG_POWERON_EFFECT

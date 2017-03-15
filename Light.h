@@ -32,6 +32,8 @@ struct softPWM {
 // ===              	    			LED FUNCTIONS		                		===
 // ====================================================================================
 
+void BladeMeter (int meterLevel); 
+
 #if defined LEDSTRINGS
 
 void lightOn(uint8_t ledPins[], int8_t segment = -1);
@@ -48,7 +50,7 @@ void lightFlicker(uint8_t ledPins[], uint8_t type, uint8_t value = 0,uint8_t ASt
     void JukeBox_Stroboscope(uint8_t ledPins[]);
   #endif
 #endif
-#if defined LUXEON
+#if defined STAR_LED
 
 void lightOn(uint8_t ledPins[], uint8_t color[]);
 void lightOff(uint8_t ledPins[]);
@@ -66,10 +68,10 @@ void getColor(uint8_t color[], uint8_t colorID); //getColor
 #endif
 #endif
 
-#if defined NEOPIXEL
+#if defined PIXELBLADE
 
-void neopixels_stripeKillKey_Enable();
-void neopixels_stripeKillKey_Disable();
+void pixelblade_KillKey_Enable();
+void pixelblade_KillKey_Disable();
 
 void lightOn(cRGB color, int8_t StartPixel=-1, int8_t StopPixel=-1);
 void lightOff();
@@ -90,7 +92,7 @@ void getColor(uint8_t colorID); //getColor
 void getColor(cRGB colorID); //getColor
 void ColorMixing(cRGB colorID, int8_t mod, uint8_t maxBrightness=MAX_BRIGHTNESS, bool Saturate=false);
 #endif
-void RampNeoPixel(uint16_t RampDuration, bool DirectionUpDown);
+void RampPixels(uint16_t RampDuration, bool DirectionUpDown);
 
 #ifdef FIREBLADE
 void FireBlade();
